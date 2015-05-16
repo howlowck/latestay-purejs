@@ -1,0 +1,30 @@
+{
+  "name": "phptek-purejs-demo",
+  "version": "0.1.0",
+  "dependencies": {
+    "moment": "^2.10.3",
+    "dom-delegate": "^2.0.3",
+    "whatwg-fetch": "^0.8.1",
+    "es6-promise": "^2.1.1"
+  },
+  "browser": {
+    "application-temp": "./src/js/templates/application-item.hbs"
+  },
+  "browserify": {
+    "transform": [
+      "hbsfy"
+    ]
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-livereload": "^3.8.0",
+    "vinyl-source-stream": "^1.1.0",
+    "browserify": "^10.1.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-util": "^3.0.4",
+    "gulp-autoprefixer": "^2.2.0",
+    "hbsfy": "^2.2.1",
+    "handlebars": "^3.0.3"
+  }
+}

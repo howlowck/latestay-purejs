@@ -1,0 +1,17 @@
+<li class="application removed {{#if processed}}{{#if approved}}approved{{else}}denied{{/if}}{{else}}unprocessed{{/if}}" id="application-{{id}}" data-id="{{id}}">
+  <div class="content">
+    <h2 class="name">{{name}}</h2>
+    <div class="reason">Reason: {{reason}}</div>
+    <div class="status">{{#if processed}}{{#if approved}}Approved{{else}}Denied{{/if}}{{else}}Unprocessed{{/if}}</div>
+  </div>
+  <div class="action-bar">
+    <div class="created">{{created}}</div>
+    {{#unless processed}}
+      <div class="actions">
+        <button class="approve" title="approve application"><i class="icon-emoji-happy"></i></button>
+        <button class="deny" title="deny application"><i class="icon-emoji-sad"></i></button>
+        <button class="delete" title="delete application"><i class="icon-cross"></i></button>
+      </div>
+    {{/unless}}
+  </div>
+</li>

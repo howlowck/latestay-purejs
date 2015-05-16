@@ -1,0 +1,112 @@
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.application {
+    position: relative;
+    list-style: none;
+    margin: 10px;
+    margin-bottom: 13px;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(120, 120, 120, 0.4);
+    opacity: 1;
+    max-height: 300px;
+    transition: max-height 0.5s, opacity 0.7s;
+    &.approved .content {
+        background-color: $clr-green-600;
+        color: white;
+    }
+
+    &.denied .content {
+        background-color: $clr-orange-800;
+        color: white;
+    }
+
+    &.unprocessed .content {
+        background-color: $clr-blue-600;
+        color: white;
+    }
+
+    &.removed {
+        max-height: 0;
+        opacity: 0;
+    }
+}
+
+.content {
+    padding: 10px;
+}
+
+.status {
+    font-size: 1.2em;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.action-bar {
+    position: relative;
+    padding: 10px;
+    background-color: white;
+
+    .created {
+        line-height: 2em;
+        display:inline-block;
+        color: rgba(120, 120, 120, 1);
+        font-size: 0.8em;
+    }
+
+    .actions {
+        display:inline-block;
+        position: absolute;
+        right: 10px;
+        top: 7px;
+    }
+}
+
+.reason {
+    font-size: 1.2em;
+}
+
+@mixin statusButton($bgColor) {
+    // border: 1px solid gray;
+    margin: 0 3px;
+    border: none;
+    font-size: 1.2em;
+    background: none;
+    padding: 2px 6px;
+    border-radius: 200px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.1s;
+    &:hover {
+        background-color: $bgColor;
+        color: white;
+        transform: scale(1.2);
+    }
+    &:active {
+        transform: scale(1.1);
+    }
+    i {
+        position: relative;
+        top: 3px;
+    }
+}
+
+button.approve {
+    @include statusButton($clr-green);
+}
+
+button.deny {
+    @include statusButton($clr-orange);
+}
+
+button.delete {
+    @include statusButton($clr-red);
+}

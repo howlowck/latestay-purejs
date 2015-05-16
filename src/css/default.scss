@@ -1,0 +1,16 @@
+@import 'reset';
+@import 'colors';
+@import 'header';
+@import 'application-item';
+
+body {
+    background: #E8E8E8;
+}
+
+h1,h2,h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+* {
+    font-family: 'Istok Web', sans-serif;
+}
