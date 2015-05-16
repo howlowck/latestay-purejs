@@ -25,7 +25,7 @@ var moment = require('moment');
 }(Element.prototype));
 
 var parseHTML = function(str) {
-  var tmp = document.implementation.createHTMLDocument();
+  var tmp = document.implementation.createHTMLDocument('New Doc');
   tmp.body.innerHTML = str;
   return tmp.body.children[0];
 };
