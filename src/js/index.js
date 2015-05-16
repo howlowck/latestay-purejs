@@ -23,7 +23,7 @@ var moment = require('moment');
     };
 }(Element.prototype));
 
-var parseHTML = function(str) {
+parseHTML = function(str) {
   var tmp = document.implementation.createHTMLDocument('New Doc');
   tmp.body.innerHTML = str;
   return tmp.body.children[0];
@@ -45,7 +45,9 @@ req.then(function (json) {
    json.data.forEach(function (item) {
        var id = item.id;
        item.created = moment(new Date(item.created_at)).fromNow();
-       var el = parseHTML(listItem(item));
+       var text = listItem(item);
+       console.log(text);
+       var el = parseHTML(text);
        appsContainer.appendChild(el);
        el.classList.remove('removed');
    });
@@ -54,7 +56,7 @@ req.then(function (json) {
 function approveApplication(evt) {
     var button = this;
     var parent = this.closest('.application');
-    var id = parent.dataset.id;
+    var id = parent.getAttribute('data-id');
     var actions = parent.querySelector('.actions');
     
     fetch(url + id + '/approve', {method: 'put'})
@@ -69,7 +71,7 @@ function approveApplication(evt) {
 function denyApplication(evt) {
     var button = this;
     var parent = this.closest('.application');
-    var id = parent.dataset.id;
+    var id = parent.getAttribute('data-id');
     var actions = parent.querySelector('.actions');
     
     fetch(url + id + '/deny', {method: 'put'})
@@ -96,7 +98,7 @@ function deleteApplication(evt) {
     //  });
     var button = this;
     var parent = this.closest('.application');
-    var id = parent.dataset.id;
+    var id = parent.getAttribute('data-id');
     var actions = parent.querySelector('.actions');
     
     fetch(url + id, {method: 'delete'})
