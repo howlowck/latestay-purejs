@@ -30,6 +30,12 @@ var parseHTML = function(str) {
 };
 
 var baseurl = 'http://latestayapp.com/';
+
+if (window.location.host === 'latestayapp.com') {
+    baseurl = '/';
+    console.log('baseurl is ' + '/');
+}
+
 var url = baseurl + 'applications/';
 var req = fetch(url).then(function (res) {return res.json();});
 
