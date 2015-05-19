@@ -1,39 +1,15 @@
 require('es6-promise').polyfill();
 require('whatwg-fetch');
+require('./closest-polyfill');
 
 var Delegate = require('dom-delegate').Delegate;
 var listItem = require('application-temp');
-var moment = require('moment');
-
-(function (ELEMENT) {
-    ELEMENT.matches = ELEMENT.matches
-        || ELEMENT.msMatchesSelector
-        || ELEMENT.mozMatchesSelector
-        || ELEMENT.webkitMatchesSelector;
-
-    ELEMENT.closest = ELEMENT.closest || function (selector) {
-        var node = this;
-        while (node) {
-            if (node.matches(selector)) {
-                break;
-            }
-            node = node.parentElement;
-        }
-        return node;
-    };
-}(Element.prototype));
-
-parseHTML = function(str) {
-  var tmp = document.implementation.createHTMLDocument('New Doc');
-  tmp.body.innerHTML = str;
-  return tmp.body.children[0];
-};
+var Helper = require('./Helper');
 
 var baseurl = 'http://latestayapp.com/';
 
 if (window.location.host === 'latestayapp.com') {
     baseurl = '/';
-    console.log('baseurl is ' + '/');
 }
 
 var url = baseurl + 'applications/';
@@ -44,10 +20,10 @@ appsContainer = document.querySelector('ul#applications');
 req.then(function (json) {
    json.data.forEach(function (item) {
        var id = item.id;
-       item.created = moment(new Date(item.created_at)).fromNow();
+       item.created = Helper.fromNow(new Date(item.created_at));
        var text = listItem(item);
        console.log(text);
-       var el = parseHTML(text);
+       var el = Helper.parseHTML(text);
        appsContainer.appendChild(el);
        el.classList.remove('removed');
    });
@@ -84,18 +60,6 @@ function denyApplication(evt) {
 }
 
 function deleteApplication(evt) {
-    // console.log(this);
-    // var $button = $(this);
-    // var $parent = $(this).closest('.application');
-    // var id = $parent.data('id');
-    // $.ajax({url: url + id, method: 'DELETE'})
-    //  .done(function (res) {
-    //     var height = $parent.height();
-    //     $parent.addClass('removed');
-    //     setTimeout(function () {
-    //         $parent.remove();
-    //     }, 500);
-    //  });
     var button = this;
     var parent = this.closest('.application');
     var id = parent.getAttribute('data-id');
@@ -115,8 +79,8 @@ function addApplication(evt) {
         .then(function (json) {
             var item = json.data;
             var id = item.id;
-            item.created = moment(new Date(item.created_at)).fromNow();
-            var el = parseHTML(listItem(item));
+            item.created = Helper.fromNow(new Date(item.created_at));
+            var el = Helper.parseHTML(listItem(item));
             console.log(el);
             appsContainer.insertBefore(el, appsContainer.firstChild);
             setTimeout(function () {
