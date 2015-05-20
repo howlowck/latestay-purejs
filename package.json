@@ -7,6 +7,8 @@
     "es6-promise": "^2.1.1"
   },
   "browser": {
+    "closest-polyfill": "./src/js/closest-polyfill.js",
+    "classlist-polyfill": "./src/js/classlist-polyfill.js",
     "application-temp": "./src/js/templates/application-item.hbs"
   },
   "browserify": {

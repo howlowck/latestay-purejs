@@ -1,6 +1,7 @@
 require('es6-promise').polyfill();
 require('whatwg-fetch');
-require('./closest-polyfill');
+require('closest-polyfill');
+require('classlist-polyfill');
 
 var Delegate = require('dom-delegate').Delegate;
 var listItem = require('application-temp');
